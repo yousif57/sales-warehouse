@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:  
+  pg-db:
+    image: postgres
+    restart: always
+    container_name: pg-db
+    hostname: pg-db
+    environment:
+      POSTGRES_PASSWORD: root # the username is postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/usr/database
+                                                                                            
+
+  pgadmin:
+    image: dpage/pgadmin4
+    hostname: pgadmin
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "root@root.com"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+    volumes:
+      - ./database:/usr/database
+    restart: always
+    ports:
+      - "5050:80"
+
+    
